@@ -55,7 +55,7 @@ app.get('/list-products', async (req, res) => {
     }
   });
 
-  const PORT = process.env.PORT || 3000; // Use the PORT environment variable or 3000 if it's not set
+  const PORT = process.env.PORT || 80; 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
