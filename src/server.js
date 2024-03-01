@@ -54,3 +54,8 @@ app.get('/list-products', async (req, res) => {
       res.status(500).json({ message: 'Error fetching data from the database', error: error.message });
     }
   });
+
+  const PORT = process.env.PORT || 3000; // Use the PORT environment variable or 3000 if it's not set
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
