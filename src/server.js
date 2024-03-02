@@ -13,7 +13,6 @@ app.post('/store-products', async (req, res) => {
     }
   
     try {
-      // Create a list of promises for each insert operation
       const insertPromises = products.map(product => {
         const { name, price, availability } = product;
         return aurora.query(
@@ -23,8 +22,6 @@ app.post('/store-products', async (req, res) => {
       });
       
       await Promise.all(insertPromises);
-  
-     
       res.status(200).json({ message: 'Success.' });
     } catch (error) {
       
@@ -37,8 +34,6 @@ app.get('/list-products', async (req, res) => {
     try {
    
       const [rows] = await aurora.query('SELECT name, price, availability FROM products');
-      
-      
       const response = {
         products: rows.map(row => ({
           name: row.name,
@@ -46,8 +41,6 @@ app.get('/list-products', async (req, res) => {
           availability: row.availability
         }))
       };
-      
-     
       res.status(200).json(response);
     } catch (error) {
       console.error('Error fetching products:', error);
