@@ -36,7 +36,7 @@ app.post('/store-products', async (req, res) => {
 app.get('/list-products', async (req, res) => {
     try {
       // Query the products table
-      const [rows] = await pool.query('SELECT name, price, availability FROM products');
+      const [rows] = await aurora.query('SELECT name, price, availability FROM products');
       
       // Construct the response object
       const response = {
@@ -55,7 +55,7 @@ app.get('/list-products', async (req, res) => {
     }
   });
 
-  const PORT = process.env.PORT || 3000; 
+const PORT = process.env.PORT || 3000; 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
