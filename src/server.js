@@ -21,13 +21,13 @@ app.post('/store-products', async (req, res) => {
           [name, price, availability]
         );
       });
-      // Execute all insert operations
+      
       await Promise.all(insertPromises);
   
-      // If all goes well
+     
       res.status(200).json({ message: 'Success.' });
     } catch (error) {
-      // If there's an error
+      
       res.status(500).json({ message: 'Error inserting data', error: error.message });
     }
   });
@@ -35,10 +35,10 @@ app.post('/store-products', async (req, res) => {
 // GET endpoint to list all products
 app.get('/list-products', async (req, res) => {
     try {
-      // Query the products table
+   
       const [rows] = await aurora.query('SELECT name, price, availability FROM products');
       
-      // Construct the response object
+      
       const response = {
         products: rows.map(row => ({
           name: row.name,
@@ -47,7 +47,7 @@ app.get('/list-products', async (req, res) => {
         }))
       };
       
-      // Send the response with a 200 status code
+     
       res.status(200).json(response);
     } catch (error) {
       console.error('Error fetching products:', error);
