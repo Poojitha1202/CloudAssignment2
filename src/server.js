@@ -13,7 +13,7 @@ app.post('/store-products', async (req, res) => {
     }
   
     try {
-      const insertPromises = products.map(product => {
+      const insertionOfPromises = products.map(product => {
         const { name, price, availability } = product;
         return aurora.query(
           'INSERT INTO products (name, price, availability) VALUES (?, ?, ?)',
@@ -21,11 +21,11 @@ app.post('/store-products', async (req, res) => {
         );
       });
       
-      await Promise.all(insertPromises);
+      await Promise.all(insertionOfPromises);
       res.status(200).json({ message: 'Success.' });
     } catch (error) {
       
-      res.status(500).json({ message: 'Error inserting data', error: error.message });
+      res.status(500).json({ message: 'There is an error inserting data', error: error.message });
     }
   });
 
@@ -44,7 +44,7 @@ app.get('/list-products', async (req, res) => {
       res.status(200).json(response);
     } catch (error) {
       console.error('Error fetching products:', error);
-      res.status(500).json({ message: 'Error fetching data from the database', error: error.message });
+      res.status(500).json({ message: 'There is an error fetching data from the aurora database', error: error.message });
     }
   });
 
